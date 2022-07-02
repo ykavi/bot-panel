@@ -1,7 +1,3 @@
-# react-challange
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -11,11 +7,6 @@ npm run dev
 # or
 yarn dev
 
-for run test
-yarn jest
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Ek bilgi
-Live olarak https://react-challange.vercel.app/ bu linkten erişilebilir.
