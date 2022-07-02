@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <>
       <Row align="center">
-        <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="Combot" />
+        <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="Shannara" />
       </Row>
     </>
   );
