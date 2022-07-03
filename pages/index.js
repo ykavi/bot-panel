@@ -12,6 +12,7 @@ import TelegramLoginButton from 'react-telegram-login';
 const Home = () => {
   const handleTelegramResponse = (response) => {
     console.log(response);
+    alert('Login Success');
   };
 
   return (
