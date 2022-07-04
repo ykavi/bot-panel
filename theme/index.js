@@ -13,6 +13,7 @@ const theme = {
     black_v2: '#646464',
     orange_v1: '#FF6000',
     orange_v2: '#FFEAE5',
+    discord: '#5865F2',
   },
   flexboxgrid: {
     gridSize: 24, // columns

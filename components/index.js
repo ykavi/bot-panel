@@ -6,5 +6,6 @@ import Button from './Button';
 import HeaderMenuList from './HeaderMenuList';
 import Grid from './Grid';
 import ItemWrapper from './ItemWrapper';
+import DiscordLogin from './DiscordLogin';
 
-export { Header, Footer, Text, NImage, Button, HeaderMenuList, Grid, ItemWrapper };
+export { Header, Footer, Text, NImage, Button, HeaderMenuList, Grid, ItemWrapper, DiscordLogin };

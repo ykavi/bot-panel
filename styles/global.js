@@ -13,7 +13,7 @@ const globalCSS = css`
   }
 
   p {
-    margin: 0;
+    margin: 0 !important;
   }
 
   ul,

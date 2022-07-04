@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import { Text } from '@components';
+import { DiscordLogin } from '@components';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -19,6 +19,10 @@ const Home = () => {
     <>
       <Row align="center">
         <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="deneme9595_bot" />
+      </Row>
+
+      <Row align="center">
+        <DiscordLogin />
       </Row>
     </>
   );
