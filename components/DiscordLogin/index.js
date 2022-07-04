@@ -9,7 +9,7 @@ const onClickHandle = () => {
 
 const DiscordLogin = () => (
   <Container onClick={onClickHandle}>
-    <Discord color="white" width={30} />
+    <Discord color="white" width={24} />
     <Text margin="0 0 0 8px" color="white" weight="medium">
       Log In With Discord
     </Text>

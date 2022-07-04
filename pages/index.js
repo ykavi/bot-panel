@@ -10,6 +10,28 @@ import {} from '@helpers';
 import TelegramLoginButton from 'react-telegram-login';
 
 const Home = () => {
+  const router = useRouter();
+  const splitToken = router.asPath.split('&');
+  const token = splitToken[1]?.replace('access_token=', '');
+
+  useEffect(() => {
+    fetch(`https://discordapp.com/api/users/@me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
+
   const handleTelegramResponse = (response) => {
     console.log(response);
     alert('Login Success');
