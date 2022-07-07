@@ -50,4 +50,10 @@ const Home = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  return {
+    props: { isPanelPage: false },
+  };
+}
+
 export default Home;
