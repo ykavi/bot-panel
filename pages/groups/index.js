@@ -4,7 +4,7 @@ import React from 'react';
 import { URL } from '@enums';
 import { getFirstLetters } from '@helpers';
 import { UserOutlined, CopyOutlined } from '@ant-design/icons';
-import { ItemWrapper, NImage } from '@components';
+import { ItemWrapper, NImage, Text } from '@components';
 import { Container } from './style';
 
 const { Meta } = Card;
@@ -78,15 +78,29 @@ const Groups = () => {
     );
   };
 
-  const getCardActions = () => {
-    return [<UserOutlined />, <CopyOutlined />];
+  const getCardActions = (membersCount, inviteLink) => {
+    const getMemberCount = () => (
+      <ItemWrapper>
+        <UserOutlined />
+        <Text size="xsmall">{membersCount}</Text>
+      </ItemWrapper>
+    );
+
+    const getInviteLink = () => (
+      <ItemWrapper>
+        <CopyOutlined />
+        <Text size="xsmall">Invite Link</Text>
+      </ItemWrapper>
+    );
+
+    return [getMemberCount(), getInviteLink()];
   };
 
   const getGroupItem = (group) => (
     <Col span={5} lg={6} md={8} sm={12} xs={12} key={group?.id}>
       <Container>
         <ItemWrapper margin="0 8px 16px 8px">
-          <Card hoverable cover={getGroupAvatar(group?.title, group?.photo)} actions={getCardActions()}>
+          <Card hoverable cover={getGroupAvatar(group?.title, group?.photo)} actions={getCardActions(group?.MembersCount, group?.invite_link)}>
             <Meta title={group?.title} description={group?.type} />
           </Card>
         </ItemWrapper>
