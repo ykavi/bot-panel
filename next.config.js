@@ -7,7 +7,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['productimages.hepsiburada.net'],
+    domains: ['productimages.hepsiburada.net', 'os.alipayobjects.com'],
   },
   lessLoaderOptions: {},
 };
