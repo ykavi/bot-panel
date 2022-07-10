@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Card, Col, Row, Avatar } from 'antd';
+import { Card, Col, Row, Avatar, message } from 'antd';
 import React from 'react';
 import { URL } from '@enums';
 import { getFirstLetters } from '@helpers';
@@ -78,6 +78,15 @@ const Groups = () => {
     );
   };
 
+  const handleInviteCopyClick = (inviteLink) => {
+    try {
+      navigator.clipboard.writeText(inviteLink);
+      message.success('Invite Link Copied');
+    } catch (e) {
+      message.error('Error!');
+    }
+  };
+
   const getCardActions = (membersCount, inviteLink) => {
     const getMemberCount = () => (
       <ItemWrapper>
@@ -87,7 +96,7 @@ const Groups = () => {
     );
 
     const getInviteLink = () => (
-      <ItemWrapper>
+      <ItemWrapper onClick={() => handleInviteCopyClick(inviteLink)}>
         <CopyOutlined />
         <Text size="xsmall">Invite Link</Text>
       </ItemWrapper>
