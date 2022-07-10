@@ -3,6 +3,7 @@ import { Card, Col, Row, Avatar } from 'antd';
 import React from 'react';
 import { URL } from '@enums';
 import { getFirstLetters } from '@helpers';
+import { UserOutlined, CopyOutlined } from '@ant-design/icons';
 import { ItemWrapper, NImage } from '@components';
 import { Container } from './style';
 
@@ -77,11 +78,15 @@ const Groups = () => {
     );
   };
 
+  const getCardActions = () => {
+    return [<UserOutlined />, <CopyOutlined />];
+  };
+
   const getGroupItem = (group) => (
     <Col span={5} lg={6} md={8} sm={12} xs={12} key={group?.id}>
       <Container>
         <ItemWrapper margin="0 8px 16px 8px">
-          <Card hoverable cover={getGroupAvatar(group?.title, group?.photo)}>
+          <Card hoverable cover={getGroupAvatar(group?.title, group?.photo)} actions={getCardActions()}>
             <Meta title={group?.title} description={group?.type} />
           </Card>
         </ItemWrapper>
