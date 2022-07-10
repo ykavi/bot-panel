@@ -15,6 +15,7 @@ const useGetFetch = (endPoint) => {
       })
       .catch((error) => {
         setError(error);
+        setLoading(false);
         console.log(`useGetFetch error: ${error}`);
       });
   }, []);
