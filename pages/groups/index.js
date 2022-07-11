@@ -4,53 +4,56 @@ import { END_POINTS } from '@enums';
 import { useGetFetch } from '@hooks';
 import { getFirstLetters } from '@helpers';
 import { UserOutlined, CopyOutlined } from '@ant-design/icons';
-import { ItemWrapper, NImage, Text } from '@components';
+import { ItemWrapper, NImage, Text, Placeholder, NoResult } from '@components';
 import { Container } from './style';
 
 const { Meta } = Card;
 
+const getGroupAvatar = (groupTitle, imageObj) => {
+  const avatarText = getFirstLetters(groupTitle);
+  const hasImage = !!imageObj;
+
+  return hasImage ? (
+    <NImage objectFit="cover" alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+  ) : (
+    <ItemWrapper center>
+      <Avatar size={120}>{avatarText}</Avatar>
+    </ItemWrapper>
+  );
+};
+const handleInviteCopyClick = (inviteLink) => {
+  try {
+    navigator.clipboard.writeText(inviteLink);
+    message.success('Invite Link Copied');
+  } catch (e) {
+    message.error('Error!');
+  }
+};
+
+const getCardActions = (membersCount, inviteLink) => {
+  const getMemberCount = () => (
+    <ItemWrapper>
+      <UserOutlined />
+      <Text size="xsmall">{membersCount}</Text>
+    </ItemWrapper>
+  );
+
+  const getInviteLink = () => (
+    <ItemWrapper onClick={() => handleInviteCopyClick(inviteLink)}>
+      <CopyOutlined />
+      <Text size="xsmall">Invite Link</Text>
+    </ItemWrapper>
+  );
+
+  return [getMemberCount(), getInviteLink()];
+};
+
 const Groups = () => {
   const { data, loading, error } = useGetFetch(END_POINTS.GROUPS);
 
-  const getGroupAvatar = (groupTitle, imageObj) => {
-    const avatarText = getFirstLetters(groupTitle);
-    const hasImage = !!imageObj;
+  if (loading) return <Placeholder />;
 
-    return hasImage ? (
-      <NImage objectFit="cover" alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-    ) : (
-      <ItemWrapper center>
-        <Avatar size={120}>{avatarText}</Avatar>
-      </ItemWrapper>
-    );
-  };
-
-  const handleInviteCopyClick = (inviteLink) => {
-    try {
-      navigator.clipboard.writeText(inviteLink);
-      message.success('Invite Link Copied');
-    } catch (e) {
-      message.error('Error!');
-    }
-  };
-
-  const getCardActions = (membersCount, inviteLink) => {
-    const getMemberCount = () => (
-      <ItemWrapper>
-        <UserOutlined />
-        <Text size="xsmall">{membersCount}</Text>
-      </ItemWrapper>
-    );
-
-    const getInviteLink = () => (
-      <ItemWrapper onClick={() => handleInviteCopyClick(inviteLink)}>
-        <CopyOutlined />
-        <Text size="xsmall">Invite Link</Text>
-      </ItemWrapper>
-    );
-
-    return [getMemberCount(), getInviteLink()];
-  };
+  if (error) return <NoResult />;
 
   const getGroupItem = (group) => (
     <Col span={5} lg={6} md={8} sm={12} xs={12} key={group?.id}>

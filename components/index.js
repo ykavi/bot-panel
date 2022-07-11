@@ -7,5 +7,7 @@ import HeaderMenuList from './HeaderMenuList';
 import Grid from './Grid';
 import ItemWrapper from './ItemWrapper';
 import DiscordLogin from './DiscordLogin';
+import Placeholder from './Placeholder';
+import NoResult from './NoResult';
 
-export { Header, Footer, Text, NImage, Button, HeaderMenuList, Grid, ItemWrapper, DiscordLogin };
+export { Header, Footer, Text, NImage, Button, HeaderMenuList, Grid, ItemWrapper, DiscordLogin, Placeholder, NoResult };
