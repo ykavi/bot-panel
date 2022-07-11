@@ -1,11 +1,11 @@
 import { Card, Col, Row, Avatar, message } from 'antd';
-import React from 'react';
 import { END_POINTS } from '@enums';
 import { useGetFetch } from '@hooks';
 import { getFirstLetters } from '@helpers';
 import { UserOutlined, CopyOutlined } from '@ant-design/icons';
 import { ItemWrapper, NImage, Text, Placeholder, NoResult } from '@components';
 import { Container } from './style';
+import Link from 'next/link';
 
 const { Meta } = Card;
 
@@ -21,7 +21,8 @@ const getGroupAvatar = (groupTitle, imageObj) => {
     </ItemWrapper>
   );
 };
-const handleInviteCopyClick = (inviteLink) => {
+const handleInviteCopyClick = (e, inviteLink) => {
+  e.stopPropagation();
   try {
     navigator.clipboard.writeText(inviteLink);
     message.success('Invite Link Copied');
@@ -32,14 +33,14 @@ const handleInviteCopyClick = (inviteLink) => {
 
 const getCardActions = (membersCount, inviteLink) => {
   const getMemberCount = () => (
-    <ItemWrapper>
+    <ItemWrapper onClick={(e) => e.stopPropagation()}>
       <UserOutlined />
       <Text size="xsmall">{membersCount}</Text>
     </ItemWrapper>
   );
 
   const getInviteLink = () => (
-    <ItemWrapper onClick={() => handleInviteCopyClick(inviteLink)}>
+    <ItemWrapper onClick={(e) => handleInviteCopyClick(e, inviteLink)}>
       <CopyOutlined />
       <Text size="xsmall">Invite Link</Text>
     </ItemWrapper>
@@ -56,15 +57,17 @@ const Groups = () => {
   if (error) return <NoResult />;
 
   const getGroupItem = (group) => (
-    <Col span={5} lg={6} md={8} sm={12} xs={12} key={group?.id}>
-      <Container>
-        <ItemWrapper margin="0 8px 16px 8px">
-          <Card hoverable cover={getGroupAvatar(group?.title, group?.photo)} actions={getCardActions(group?.MembersCount, group?.invite_link)}>
-            <Meta title={group?.title} description={group?.type} />
-          </Card>
-        </ItemWrapper>
-      </Container>
-    </Col>
+    <Link href={`group/${group?.id}`}>
+      <Col span={5} lg={6} md={8} sm={12} xs={12} key={group?.id}>
+        <Container>
+          <ItemWrapper margin="0 8px 16px 8px">
+            <Card hoverable cover={getGroupAvatar(group?.title, group?.photo)} actions={getCardActions(group?.MembersCount, group?.invite_link)}>
+              <Meta title={group?.title} description={group?.type} />
+            </Card>
+          </ItemWrapper>
+        </Container>
+      </Col>
+    </Link>
   );
 
   return <Row justify="center">{data?.Groups?.map(getGroupItem)}</Row>;

@@ -29,7 +29,7 @@ const PanelLayout = ({ children }) => {
       }}
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="logo" />
+        <div className="logo">LOGO</div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout className="site-layout">
@@ -66,9 +66,7 @@ const PanelLayout = ({ children }) => {
           style={{
             textAlign: 'center',
           }}
-        >
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        ></Footer>
       </Layout>
     </Layout>
   );
