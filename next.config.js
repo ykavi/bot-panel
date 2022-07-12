@@ -10,6 +10,15 @@ const nextConfig = {
     domains: ['productimages.hepsiburada.net', 'os.alipayobjects.com'],
   },
   lessLoaderOptions: {},
+  async redirects() {
+    return [
+      {
+        source: '/group/:id',
+        destination: '/group/:id/settings',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withLess(nextConfig);

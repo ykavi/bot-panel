@@ -55,12 +55,9 @@ const PanelLayout = ({ children }) => {
     setMenuItem([...controlPanelData, ...management]);
   }, [groupSetting]);
 
-  console.log(router);
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
-    console.log({ item, key, keyPath, selectedKeys, domEvent });
     const { id } = router.query;
-    console.log(id);
-    const url = `${id}/${key}`;
+    const url = `/group/${id}/${key}`;
     router.push(url);
   };
 
@@ -72,7 +69,7 @@ const PanelLayout = ({ children }) => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo">LOGO</div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={menuItem} onSelect={onSelectHandle} />
+        <Menu theme="dark" defaultSelectedKeys={['settings']} mode="inline" items={menuItem} onSelect={onSelectHandle} />
       </Sider>
       <Layout className="site-layout">
         <Header
