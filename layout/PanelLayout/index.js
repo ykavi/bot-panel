@@ -1,4 +1,3 @@
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
@@ -24,8 +23,15 @@ const PanelLayout = ({ children }) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const [menuItem, setMenuItem] = useState([]);
+  const [openedSubMenu, setOpenedSubMenu] = useState('');
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
+
+  const { asPath } = router;
+  const splitAsPath = asPath.split('/');
+  const pageEndPoint = splitAsPath[splitAsPath.length - 1];
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (data?.success && data?.GruopAllSettings) dispatch(setGroupSetting(data?.GruopAllSettings));
@@ -70,7 +76,14 @@ const PanelLayout = ({ children }) => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo">LOGO</div>
-        <Menu theme="dark" defaultSelectedKeys={['settings']} mode="inline" items={menuItem} onSelect={onSelectHandle} />
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={[pageEndPoint]}
+          defaultOpenKeys={[openedSubMenu]}
+          mode="inline"
+          items={menuItem}
+          onSelect={onSelectHandle}
+        />
       </Sider>
       <Layout className="site-layout">
         <Header
