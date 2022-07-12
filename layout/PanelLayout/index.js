@@ -55,12 +55,13 @@ const PanelLayout = ({ children }) => {
     setMenuItem([...controlPanelData, ...management]);
   }, [groupSetting]);
 
+  console.log(router);
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    console.log({ item, key, keyPath, selectedKeys, domEvent });
     const { id } = router.query;
-    console.log(router.query.slug);
     console.log(id);
-    const url = `${router.asPath}/${key}`;
-    router.push(key, url);
+    const url = `${id}/${key}`;
+    router.push(url);
   };
 
   return (
