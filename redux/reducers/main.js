@@ -1,17 +1,16 @@
 import * as t from '../types';
-import {} from '@mock';
 
 const main = (
   state = {
-    name: 'test',
+    groupSetting: null,
   },
   action,
 ) => {
   switch (action.type) {
-    case t.SET_NAME:
+    case t.SET_GROUP_SETTING:
       return {
         ...state,
-        name: action.payload,
+        groupSetting: action.payload,
       };
 
     default:

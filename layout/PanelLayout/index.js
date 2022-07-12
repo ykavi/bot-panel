@@ -1,6 +1,12 @@
 import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useGetFetch } from '@hooks';
+import { useRouter } from 'next/router';
+import { setGroupSetting } from '../../redux/actions/main';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -12,16 +18,51 @@ function getItem(label, key, icon, children) {
   };
 }
 
-const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [getItem('Tom', '3'), getItem('Bill', '4'), getItem('Alex', '5')]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
-];
-
 const PanelLayout = ({ children }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
+  const [menuItem, setMenuItem] = useState([]);
+  const { id } = router.query;
+  const { data, loading, error } = useGetFetch(`group/${id}`);
+
+  useEffect(() => {
+    if (data?.success && data?.GruopAllSettings) dispatch(setGroupSetting(data?.GruopAllSettings));
+  }, [data?.GruopAllSettings, data?.success]);
+
+  const groupSetting = useSelector((store) => store.main.groupSetting);
+
+  useEffect(() => {
+    let controlPanelData = [];
+    let management = [];
+    let subManagement = [];
+
+    groupSetting?.ControlPanel?.forEach((item) => {
+      controlPanelData.push(getItem(item?.Name, item?.URL, <PieChartOutlined />));
+    });
+
+    groupSetting?.Management?.forEach((item, index) => {
+      if (item?.Fields.length) {
+        item?.Fields?.forEach((subItem) => {
+          subManagement.push(getItem(subItem?.Name, subItem?.URL, <PieChartOutlined />));
+        });
+        management.push(getItem(item?.Name, index, <PieChartOutlined />, subManagement));
+        subManagement = [];
+      } else {
+        management.push(getItem(item?.Name, item?.URL, <PieChartOutlined />));
+      }
+    });
+    setMenuItem([...controlPanelData, ...management]);
+  }, [groupSetting]);
+
+  const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    const { id } = router.query;
+    console.log(router.query.slug);
+    console.log(id);
+    const url = `${router.asPath}/${key}`;
+    router.push(key, url);
+  };
+
   return (
     <Layout
       style={{
@@ -30,7 +71,7 @@ const PanelLayout = ({ children }) => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo">LOGO</div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={menuItem} onSelect={onSelectHandle} />
       </Sider>
       <Layout className="site-layout">
         <Header

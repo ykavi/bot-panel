@@ -1,8 +1,8 @@
 import * as t from '../types';
 
-export const setProducts = (data) => (dispatch) => {
+export const setGroupSetting = (data) => (dispatch) => {
   dispatch({
-    type: t.SET_NAME,
+    type: t.SET_GROUP_SETTING,
     payload: data,
   });
 };
