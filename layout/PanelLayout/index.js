@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout, Menu } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { PANEL_MENU_ICONS } from '@enums';
 import { useRouter } from 'next/router';
@@ -23,15 +23,17 @@ const PanelLayout = ({ children }) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const [menuItem, setMenuItem] = useState([]);
-  const [openedSubMenu, setOpenedSubMenu] = useState('');
+  const [openedMenu, setOpenedMenu] = useState('');
+  const [openedSubMenuKey, setOpenedSubMenuKey] = useState(null);
+  const { asPath } = router;
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
 
-  const { asPath } = router;
-  const splitAsPath = asPath.split('/');
-  const pageEndPoint = splitAsPath[splitAsPath.length - 1];
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const splitAsPath = asPath.split('/');
+    const pageEndPoint = splitAsPath[splitAsPath.length - 1];
+    setOpenedMenu(pageEndPoint);
+  }, [asPath]);
 
   useEffect(() => {
     if (data?.success && data?.GruopAllSettings) dispatch(setGroupSetting(data?.GruopAllSettings));
@@ -62,11 +64,28 @@ const PanelLayout = ({ children }) => {
     setMenuItem([...controlPanelData, ...management]);
   }, [groupSetting]);
 
+  //TODO: Sub menu acılı gelmiyor bakılacak
+  useEffect(() => {
+    let hasItem;
+    const hasFieldItems = menuItem?.filter((item) => item?.children?.length > 0);
+
+    hasFieldItems?.forEach((item) => {
+      hasItem = item?.children?.find((i) => i.key === openedMenu);
+      if (hasItem) {
+        setOpenedSubMenuKey(`${item.key}`);
+        console.log('TEK');
+        return;
+      }
+    });
+  }, [menuItem, openedMenu]);
+
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
     const { id } = router.query;
     const url = `/group/${id}/${key}`;
     router.push(url);
   };
+
+  if (loading) return <p>loading</p>;
 
   return (
     <Layout
@@ -78,8 +97,8 @@ const PanelLayout = ({ children }) => {
         <div className="logo">LOGO</div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={[pageEndPoint]}
-          defaultOpenKeys={[openedSubMenu]}
+          defaultSelectedKeys={[openedMenu]}
+          defaultOpenKeys={[openedSubMenuKey]}
           mode="inline"
           items={menuItem}
           onSelect={onSelectHandle}
