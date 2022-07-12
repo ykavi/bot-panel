@@ -26,6 +26,10 @@ import {
   StopOutlined,
   DeleteOutlined,
   ApiOutlined,
+  UserOutlined,
+  BugOutlined,
+  DingtalkOutlined,
+  LineChartOutlined,
 } from '@ant-design/icons';
 
 export const URL = 'http://46.101.203.185:3000/api/v1';
@@ -38,7 +42,7 @@ export const PANEL_MENU_ICONS = {
   settings: <SettingOutlined />,
   announcements: <NotificationOutlined />,
   privatebot: <PieChartOutlined />,
-  channelrecords: <AimOutlined />,
+  channelrecords: <FormOutlined />,
   basicsettings: <ToolOutlined />,
   warning: <WarningOutlined />,
   principles: <FormOutlined />,
@@ -63,4 +67,9 @@ export const PANEL_MENU_ICONS = {
   block: <StopOutlined />,
   messagedelete: <DeleteOutlined />,
   triggersv2setting: <ApiOutlined />,
+  'Yeni Üyeler': <UserOutlined />,
+  'Anti Spam': <BugOutlined />,
+  Filtreler: <FilterOutlined />,
+  Eğlence: <DingtalkOutlined />,
+  Raporlar: <LineChartOutlined />,
 };

@@ -47,7 +47,7 @@ const PanelLayout = ({ children }) => {
         item?.Fields?.forEach((subItem) => {
           subManagement.push(getItem(subItem?.Name, subItem?.URL, PANEL_MENU_ICONS[subItem?.URL]));
         });
-        management.push(getItem(item?.Name, index, PANEL_MENU_ICONS[index], subManagement));
+        management.push(getItem(item?.Name, index, PANEL_MENU_ICONS[item?.Name], subManagement));
         subManagement = [];
       } else {
         management.push(getItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
