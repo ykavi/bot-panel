@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon, children) {
+function getItem(label, key, icon, children, childKeys) {
   return {
     key,
     icon,
     children,
     label,
+    childKeys,
   };
 }
 
@@ -23,6 +24,7 @@ const PanelLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [menuItem, setMenuItem] = useState([]);
   const [openedMenu, setOpenedMenu] = useState('');
+  const [openedSubMenu, setOpenedSubMenu] = useState('');
   const { asPath } = router;
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
@@ -53,7 +55,7 @@ const PanelLayout = ({ children }) => {
         item?.Fields?.forEach((subItem) => {
           subManagement.push(getItem(subItem?.Name, subItem?.URL, PANEL_MENU_ICONS[subItem?.URL]));
         });
-        management.push(getItem(item?.Name, index, PANEL_MENU_ICONS[item?.Name], subManagement));
+        management.push(getItem(item?.Name, `${index}`, PANEL_MENU_ICONS[item?.Name], subManagement, [...subManagement.map((i) => i.key)]));
         subManagement = [];
       } else {
         management.push(getItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
@@ -69,6 +71,7 @@ const PanelLayout = ({ children }) => {
   };
 
   if (loading) return <p>loading</p>;
+  if (error) return null;
 
   return (
     <Layout
@@ -78,7 +81,14 @@ const PanelLayout = ({ children }) => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo">LOGO</div>
-        <Menu theme="dark" defaultSelectedKeys={[openedMenu]} defaultOpenKeys={['0']} mode="inline" items={menuItem} onSelect={onSelectHandle} />
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={[openedMenu]}
+          defaultOpenKeys={openedSubMenuIndex()}
+          mode="inline"
+          items={menuItem}
+          onSelect={onSelectHandle}
+        />
       </Sider>
       <Layout className="site-layout">
         <Header
@@ -97,7 +107,7 @@ const PanelLayout = ({ children }) => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>{menuItem?.find((i) => i.childKeys?.includes(openedMenu))?.key}</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div
