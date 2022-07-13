@@ -8,13 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon, children, childKeys) {
+function getItem(label, key, icon, children) {
   return {
     key,
     icon,
     children,
     label,
-    childKeys,
   };
 }
 
@@ -24,7 +23,6 @@ const PanelLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [menuItem, setMenuItem] = useState([]);
   const [openedMenu, setOpenedMenu] = useState('');
-  const [openedSubMenu, setOpenedSubMenu] = useState('');
   const { asPath } = router;
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
@@ -55,7 +53,8 @@ const PanelLayout = ({ children }) => {
         item?.Fields?.forEach((subItem) => {
           subManagement.push(getItem(subItem?.Name, subItem?.URL, PANEL_MENU_ICONS[subItem?.URL]));
         });
-        management.push(getItem(item?.Name, `${index}`, PANEL_MENU_ICONS[item?.Name], subManagement, [...subManagement.map((i) => i.key)]));
+        const collapseKey = [...subManagement.map((i) => i.key)].includes(openedMenu) ? openedMenu : index;
+        management.push(getItem(item?.Name, collapseKey, PANEL_MENU_ICONS[item?.Name], subManagement));
         subManagement = [];
       } else {
         management.push(getItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
@@ -84,7 +83,7 @@ const PanelLayout = ({ children }) => {
         <Menu
           theme="dark"
           defaultSelectedKeys={[openedMenu]}
-          defaultOpenKeys={openedSubMenuIndex()}
+          defaultOpenKeys={[openedMenu]}
           mode="inline"
           items={menuItem}
           onSelect={onSelectHandle}
