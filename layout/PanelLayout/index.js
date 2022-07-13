@@ -4,8 +4,7 @@ import { useGetFetch } from '@hooks';
 import { PANEL_MENU_ICONS } from '@enums';
 import { useRouter } from 'next/router';
 import { setGroupSetting } from '../../redux/actions/main';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 
