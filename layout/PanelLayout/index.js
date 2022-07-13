@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout, Menu } from 'antd';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { PANEL_MENU_ICONS } from '@enums';
 import { useRouter } from 'next/router';
@@ -24,7 +24,6 @@ const PanelLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [menuItem, setMenuItem] = useState([]);
   const [openedMenu, setOpenedMenu] = useState('');
-  const [openedSubMenuKey, setOpenedSubMenuKey] = useState(null);
   const { asPath } = router;
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
@@ -64,21 +63,6 @@ const PanelLayout = ({ children }) => {
     setMenuItem([...controlPanelData, ...management]);
   }, [groupSetting]);
 
-  //TODO: Sub menu acılı gelmiyor bakılacak
-  useEffect(() => {
-    let hasItem;
-    const hasFieldItems = menuItem?.filter((item) => item?.children?.length > 0);
-
-    hasFieldItems?.forEach((item) => {
-      hasItem = item?.children?.find((i) => i.key === openedMenu);
-      if (hasItem) {
-        setOpenedSubMenuKey(`${item.key}`);
-        console.log('TEK');
-        return;
-      }
-    });
-  }, [menuItem, openedMenu]);
-
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
     const { id } = router.query;
     const url = `/group/${id}/${key}`;
@@ -95,14 +79,7 @@ const PanelLayout = ({ children }) => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo">LOGO</div>
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={[openedMenu]}
-          defaultOpenKeys={[openedSubMenuKey]}
-          mode="inline"
-          items={menuItem}
-          onSelect={onSelectHandle}
-        />
+        <Menu theme="dark" defaultSelectedKeys={[openedMenu]} defaultOpenKeys={['0']} mode="inline" items={menuItem} onSelect={onSelectHandle} />
       </Sider>
       <Layout className="site-layout">
         <Header
