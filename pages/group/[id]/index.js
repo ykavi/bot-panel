@@ -1,9 +1,7 @@
+import { withIsPanelPage } from '@hocs';
+
 const Group = () => <p>group</p>;
 
-export async function getServerSideProps(context) {
-  return {
-    props: { isPanelPage: true },
-  };
-}
+export const getServerSideProps = withIsPanelPage((context) => {});
 
 export default Group;

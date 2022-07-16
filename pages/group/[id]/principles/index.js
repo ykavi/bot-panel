@@ -1,9 +1,7 @@
+import { withIsPanelPage } from '@hocs';
+
 const Principles = () => <p>Principles</p>;
 
-export async function getServerSideProps(context) {
-  return {
-    props: { isPanelPage: true },
-  };
-}
+export const getServerSideProps = withIsPanelPage((context) => {});
 
 export default Principles;

@@ -8,6 +8,7 @@ import {} from '@mock';
 import {} from '@enums';
 import {} from '@helpers';
 import TelegramLoginButton from 'react-telegram-login';
+import { withIsPanelPage } from '@hocs';
 
 const Home = () => {
   const router = useRouter();
@@ -50,10 +51,6 @@ const Home = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  return {
-    props: { isPanelPage: false },
-  };
-}
+export const getServerSideProps = withIsPanelPage((context) => {});
 
 export default Home;

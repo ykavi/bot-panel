@@ -9,7 +9,8 @@
       "@mock": ["./mock"],
       "@helpers": ["./utils/helpers"],
       "@enums": ["./enums"],
-      "@hooks": ["./hooks"]
+      "@hooks": ["./hooks"],
+      "@hocs": ["./hocs"]
     }
   }
 }

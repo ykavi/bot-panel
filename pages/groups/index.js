@@ -6,6 +6,7 @@ import { UserOutlined, CopyOutlined } from '@ant-design/icons';
 import { ItemWrapper, NImage, Text, Placeholder, NoResult } from '@components';
 import { Container } from './style';
 import Link from 'next/link';
+import { withIsPanelPage } from '@hocs';
 
 const { Meta } = Card;
 
@@ -72,5 +73,7 @@ const Groups = () => {
 
   return <Row justify="center">{data?.Groups?.map(getGroupItem)}</Row>;
 };
+
+export const getServerSideProps = withIsPanelPage((context) => {});
 
 export default Groups;
