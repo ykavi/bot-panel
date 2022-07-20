@@ -48,9 +48,10 @@ const PanelLayout = ({ children }) => {
     const activeSubMenuName = subMenus?.find((item) => item.key === openedMenu);
     const activeMenuName = activeRootMenuName || activeSubMenuName;
 
-    setActiveMenuDisplayName(activeMenuName?.label);
+    if (activeMenuName) setActiveMenuDisplayName(activeMenuName?.label);
+
     dispatch(setActiveMenuName(activeMenuName?.label)); //TODO: not used now. Maybe later
-  }, [openedMenu]);
+  }, [openedMenu, []]);
 
   useEffect(() => {
     let controlPanelData = [];
