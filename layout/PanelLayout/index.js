@@ -40,6 +40,14 @@ const PanelLayout = ({ children }) => {
   const groupSetting = useSelector((store) => store.main.groupSetting);
 
   useEffect(() => {
+    const rootMenus = menuItem?.filter((item) => !item.children);
+    const subMenus = menuItem?.filter((item) => !!item.children);
+    console.log(menuItem);
+    console.log(subMenus); //label ı redux-state at
+    console.log(rootMenus);
+  }, [openedMenu]);
+
+  useEffect(() => {
     let controlPanelData = [];
     let management = [];
     let subManagement = [];
@@ -62,7 +70,7 @@ const PanelLayout = ({ children }) => {
     });
     setMenuItem([...controlPanelData, ...management]);
   }, [groupSetting]);
-
+  console.log(openedMenu);
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
     const { id } = router.query;
     const url = `/group/${id}/${key}`;
@@ -121,7 +129,7 @@ const PanelLayout = ({ children }) => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>{menuItem?.find((i) => i.childKeys?.includes(openedMenu))?.key}</Breadcrumb.Item>
+            <Breadcrumb.Item>{menuItem?.find((i) => i.childKeys?.includes(openedMenu))?.name}</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div
