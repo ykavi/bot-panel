@@ -8,6 +8,7 @@ const MenuItemCard = ({ children, title, description }) => (
     size="middle"
     style={{
       display: 'flex',
+      margin: '0 0 16px 0',
     }}
   >
     <Card title={title} size="large">

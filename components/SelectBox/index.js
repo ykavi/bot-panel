@@ -9,7 +9,7 @@ const SelectBox = ({ handleOnSelect, label }) => {
   return (
     <Container>
       <ItemWrapper margin="16px 0 8px 0">
-        <Title level={5}>{label}</Title>
+        <Title level={5}>{`Bot ${label}`}</Title>
       </ItemWrapper>
 
       <Col xl={12} lg={12} md={24} sm={24}>

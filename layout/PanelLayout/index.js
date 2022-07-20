@@ -112,6 +112,8 @@ const PanelLayout = ({ children }) => {
         <Content
           style={{
             margin: '0 16px',
+            height: '100vh',
+            overflow: 'auto',
           }}
         >
           <Breadcrumb
