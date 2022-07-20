@@ -1,6 +1,10 @@
 import { css } from 'styled-components';
 
 const globalCSS = css`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   html {
     height: 100%;
     font-family: 'Roboto', Arial, sans-serif;
