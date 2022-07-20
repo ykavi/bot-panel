@@ -1,4 +1,4 @@
-import { PageHeader, Layout, Menu, Typography } from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { PANEL_MENU_ICONS } from '@enums';
@@ -42,18 +42,6 @@ const PanelLayout = ({ children }) => {
   const groupSetting = useSelector((store) => store.main.groupSetting);
 
   useEffect(() => {
-    const rootMenus = menuItem?.filter((item) => !item.children);
-    const subMenus = menuItem?.filter((item) => !!item.children);
-    const activeRootMenuName = rootMenus?.find((item) => item.key === openedMenu);
-    const activeSubMenuName = subMenus?.find((item) => item.key === openedMenu);
-    const activeMenuName = activeRootMenuName || activeSubMenuName;
-
-    if (activeMenuName) setActiveMenuDisplayName(activeMenuName?.label);
-
-    dispatch(setActiveMenuName(activeMenuName?.label)); //TODO: not used now. Maybe later
-  }, [openedMenu, []]);
-
-  useEffect(() => {
     let controlPanelData = [];
     let management = [];
     let subManagement = [];
@@ -76,8 +64,9 @@ const PanelLayout = ({ children }) => {
     });
     setMenuItem([...controlPanelData, ...management]);
   }, [groupSetting]);
-  console.log(openedMenu);
+
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    setActiveMenuDisplayName(domEvent.target.innerHTML);
     const { id } = router.query;
     const url = `/group/${id}/${key}`;
     router.push(url);
