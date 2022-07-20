@@ -1,12 +1,13 @@
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { PageHeader, Layout, Menu, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { PANEL_MENU_ICONS } from '@enums';
 import { useRouter } from 'next/router';
-import { setGroupSetting } from '../../redux/actions/main';
+import { setGroupSetting, setActiveMenuName } from '../../redux/actions/main';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
+const { Title } = Typography;
 
 function getItem(label, key, icon, children) {
   return {
@@ -23,6 +24,7 @@ const PanelLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [menuItem, setMenuItem] = useState([]);
   const [openedMenu, setOpenedMenu] = useState('');
+  const [activeMenuDisplayName, setActiveMenuDisplayName] = useState('');
   const { asPath } = router;
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
@@ -42,9 +44,12 @@ const PanelLayout = ({ children }) => {
   useEffect(() => {
     const rootMenus = menuItem?.filter((item) => !item.children);
     const subMenus = menuItem?.filter((item) => !!item.children);
-    console.log(menuItem);
-    console.log(subMenus); //label ı redux-state at
-    console.log(rootMenus);
+    const activeRootMenuName = rootMenus?.find((item) => item.key === openedMenu);
+    const activeSubMenuName = subMenus?.find((item) => item.key === openedMenu);
+    const activeMenuName = activeRootMenuName || activeSubMenuName;
+
+    setActiveMenuDisplayName(activeMenuName?.label);
+    dispatch(setActiveMenuName(activeMenuName?.label)); //TODO: not used now. Maybe later
   }, [openedMenu]);
 
   useEffect(() => {
@@ -124,21 +129,17 @@ const PanelLayout = ({ children }) => {
             overflow: 'auto',
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item>{menuItem?.find((i) => i.childKeys?.includes(openedMenu))?.name}</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
           <div
             className="site-layout-background"
             style={{
               padding: 24,
+              paddingBottom: 64,
               minHeight: 360,
             }}
           >
+            <Title level={4} style={{ marginBottom: 24 }}>
+              {activeMenuDisplayName}
+            </Title>
             {children}
           </div>
         </Content>
