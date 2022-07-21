@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { PANEL_MENU_ICONS } from '@enums';
 import { useRouter } from 'next/router';
-import { setGroupSetting, setActiveMenuName } from '../../redux/actions/main';
+import { setGroupSetting, setGroupId } from '../../redux/actions/main';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -38,6 +38,10 @@ const PanelLayout = ({ children }) => {
   useEffect(() => {
     if (data?.success && data?.GruopAllSettings) dispatch(setGroupSetting(data?.GruopAllSettings));
   }, [data?.GruopAllSettings, data?.success]);
+
+  useEffect(() => {
+    if (id) dispatch(setGroupId(id));
+  }, [id]);
 
   const groupSetting = useSelector((store) => store.main.groupSetting);
 

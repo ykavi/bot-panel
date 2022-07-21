@@ -1,2 +1,2 @@
 export const SET_GROUP_SETTING = 'SET_GROUP_SETTING';
-export const SET_ACTIVE_MENU_NAME = 'SET_ACTIVE_MENU_NAME';
+export const SET_GROUP_ID = 'SET_GROUP_ID';

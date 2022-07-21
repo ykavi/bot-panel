@@ -3,7 +3,7 @@ import * as t from '../types';
 const main = (
   state = {
     groupSetting: null,
-    activeMenuName: null,
+    groupId: null,
   },
   action,
 ) => {
@@ -13,10 +13,10 @@ const main = (
         ...state,
         groupSetting: action.payload,
       };
-    case t.SET_ACTIVE_MENU_NAME:
+    case t.SET_GROUP_ID:
       return {
         ...state,
-        activeMenuName: action.payload,
+        groupId: action.payload,
       };
 
     default:

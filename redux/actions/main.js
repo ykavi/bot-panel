@@ -6,9 +6,9 @@ export const setGroupSetting = (data) => (dispatch) => {
     payload: data,
   });
 };
-export const setActiveMenuName = (data) => (dispatch) => {
+export const setGroupId = (data) => (dispatch) => {
   dispatch({
-    type: t.SET_ACTIVE_MENU_NAME,
+    type: t.SET_GROUP_ID,
     payload: data,
   });
 };

@@ -1,5 +1,5 @@
 import { withIsPanelPage } from '@hocs';
-import { useGetFetch } from '@hooks';
+import { useMenuItemGetFetch } from '@hooks';
 import { openNotificationWithIcon } from '@helpers';
 import { Input, Button, Col } from 'antd';
 import { MenuItemCard, SelectBox, Switch } from '@components';
@@ -15,8 +15,7 @@ const handleOnChange = (value) => {
 
 const Settings = () => {
   const [inputValues, setInputValues] = useState({});
-  const { data, loading, error } = useGetFetch('group/-1001799280304/settings');
-  console.log(data);
+  const { data, loading, error } = useMenuItemGetFetch(`settings`);
 
   const onChangeInputHandle = (e, name) => {
     const { value } = e.target;
