@@ -95,6 +95,7 @@ const PanelLayout = ({ children }) => {
           top: 0,
           bottom: 0,
         }}
+        width={250}
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
