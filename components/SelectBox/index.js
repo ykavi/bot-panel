@@ -6,8 +6,8 @@ const { Option } = Select;
 const { Title } = Typography;
 
 const getOptions = (optionData) =>
-  optionData?.map((item) => (
-    <Option key={item} value={item}>
+  optionData?.map((item, index) => (
+    <Option key={index} value={item}>
       {item}
     </Option>
   ));
