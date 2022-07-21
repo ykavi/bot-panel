@@ -11,5 +11,21 @@ import Placeholder from './Placeholder';
 import NoResult from './NoResult';
 import MenuItemCard from './MenuItemCard';
 import SelectBox from './SelectBox';
+import Switch from './Switch';
 
-export { Header, Footer, Text, NImage, Button, HeaderMenuList, Grid, ItemWrapper, DiscordLogin, Placeholder, NoResult, MenuItemCard, SelectBox };
+export {
+  Header,
+  Footer,
+  Text,
+  NImage,
+  Button,
+  HeaderMenuList,
+  Grid,
+  ItemWrapper,
+  DiscordLogin,
+  Placeholder,
+  NoResult,
+  MenuItemCard,
+  SelectBox,
+  Switch,
+};

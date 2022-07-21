@@ -1,15 +1,16 @@
 import { withIsPanelPage } from '@hocs';
 import { useGetFetch } from '@hooks';
-import { MenuItemCard, SelectBox } from '@components';
-import { useEffect } from 'react';
+import { MenuItemCard, SelectBox, Switch } from '@components';
 
 const handleOnSelect = (value) => {
   console.log(`selected ${value}`);
 };
 
-const Settings = () => {
-  useEffect(() => {}, []);
+const handleOnChange = (value) => {
+  console.log(`changed ${value}`);
+};
 
+const Settings = () => {
   const { data, loading, error } = useGetFetch('group/-1001799280304/settings');
   console.log(data);
 
@@ -18,16 +19,27 @@ const Settings = () => {
       <MenuItemCard title={displayName} description={description}>
         <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
       </MenuItemCard>
+    </>
+  );
+
+  const isSwitchType = ({ displayName, description, value }) => (
+    <>
       <MenuItemCard title={displayName} description={description}>
-        <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
-      </MenuItemCard>
-      <MenuItemCard title={displayName} description={description}>
-        <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
+        <Switch handleOnChange={handleOnChange} label={description} value={value} />
       </MenuItemCard>
     </>
   );
 
-  return <>{data?.GruopSettings?.map((item) => item.type === 'Listbox' && isSelectBoxType(item))}</>;
+  return (
+    <>
+      {data?.GruopSettings?.map((item) => (
+        <>
+          {item.type === 'Listbox' && isSelectBoxType(item)}
+          {item.type === 'Switch Button' && isSwitchType(item)}
+        </>
+      ))}
+    </>
+  );
 };
 
 export const getServerSideProps = withIsPanelPage((context) => {});
