@@ -12,6 +12,7 @@ import NoResult from './NoResult';
 import MenuItemCard from './MenuItemCard';
 import SelectBox from './SelectBox';
 import Switch from './Switch';
+import PanelMenuTypes from './PanelMenuTypes';
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   MenuItemCard,
   SelectBox,
   Switch,
+  PanelMenuTypes,
 };

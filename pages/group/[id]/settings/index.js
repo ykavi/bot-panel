@@ -1,73 +1,28 @@
 import { withIsPanelPage } from '@hocs';
 import { useMenuItemGetFetch } from '@hooks';
 import { openNotificationWithIcon } from '@helpers';
-import { Input, Button, Col } from 'antd';
-import { MenuItemCard, SelectBox, Switch } from '@components';
-import { useState } from 'react';
+import { PanelMenuTypes } from '@components';
 
-const handleOnSelect = (value) => {
-  console.log(`selected ${value}`);
+const listBoxAction = (value) => {
+  console.log(`listBoxAction ${value}`);
 };
 
-const handleOnChange = (value) => {
-  console.log(`changed ${value}`);
+const switchAction = (value) => {
+  console.log(`switchAction ${value}`);
+};
+
+const textBoxAction = (inputName) => {
+  openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
+  console.log('textBoxAction', inputName);
 };
 
 const Settings = () => {
-  const [inputValues, setInputValues] = useState({});
   const { data, loading, error } = useMenuItemGetFetch(`settings`);
-
-  const onChangeInputHandle = (e, name) => {
-    const { value } = e.target;
-    const newValues = { ...inputValues, [name]: value };
-    setInputValues(newValues);
-  };
-
-  const onClickHandle = (inputName) => {
-    const savedInputValue = inputValues[inputName];
-    openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
-    console.log('onClickHandle', savedInputValue);
-  };
-
-  const isSelectBoxType = ({ displayName, description, options, value }) => (
-    <>
-      <MenuItemCard title={displayName} description={description}>
-        <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
-      </MenuItemCard>
-    </>
-  );
-
-  const isSwitchType = ({ displayName, description, value }) => (
-    <>
-      <MenuItemCard title={displayName} description={description}>
-        <Switch handleOnChange={handleOnChange} label={description} value={value} />
-      </MenuItemCard>
-    </>
-  );
-
-  const isTextBoxType = ({ displayName, description, value, name }) => (
-    <>
-      <MenuItemCard title={displayName} description={description}>
-        <Col lg={12}>
-          <Input.Group compact>
-            <Input style={{ width: 'calc(100% - 200px)' }} defaultValue="https://ant.design" onChange={(e) => onChangeInputHandle(e, name)} />
-            <Button type="primary" onClick={() => onClickHandle(name)} disabled={!inputValues[name]}>
-              Kaydet
-            </Button>
-          </Input.Group>
-        </Col>
-      </MenuItemCard>
-    </>
-  );
 
   return (
     <>
-      {data?.GruopSettings?.map((item) => (
-        <>
-          {item.type === 'Listbox' && isSelectBoxType(item)}
-          {item.type === 'Switch Button' && isSwitchType(item)}
-          {item.type === 'Textbox' && isTextBoxType(item)}
-        </>
+      {data?.GruopSettings?.map((item, index) => (
+        <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>
   );
