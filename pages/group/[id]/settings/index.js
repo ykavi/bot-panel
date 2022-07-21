@@ -1,5 +1,6 @@
 import { withIsPanelPage } from '@hocs';
 import { useGetFetch } from '@hooks';
+import { openNotificationWithIcon } from '@helpers';
 import { Input, Button, Col } from 'antd';
 import { MenuItemCard, SelectBox, Switch } from '@components';
 import { useState } from 'react';
@@ -25,6 +26,7 @@ const Settings = () => {
 
   const onClickHandle = (inputName) => {
     const savedInputValue = inputValues[inputName];
+    openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
     console.log('onClickHandle', savedInputValue);
   };
 
@@ -50,7 +52,7 @@ const Settings = () => {
         <Col lg={12}>
           <Input.Group compact>
             <Input style={{ width: 'calc(100% - 200px)' }} defaultValue="https://ant.design" onChange={(e) => onChangeInputHandle(e, name)} />
-            <Button type="primary" onClick={() => onClickHandle(name)}>
+            <Button type="primary" onClick={() => onClickHandle(name)} disabled={!inputValues[name]}>
               Kaydet
             </Button>
           </Input.Group>

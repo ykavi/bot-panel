@@ -1,3 +1,5 @@
+import { notification } from 'antd';
+
 export const getFirstLetters = (str) => {
   const firstLetters = str
     .split(' ')
@@ -5,4 +7,11 @@ export const getFirstLetters = (str) => {
     .join('');
 
   return firstLetters;
+};
+
+export const openNotificationWithIcon = (type, message, description) => {
+  notification[type]({
+    message,
+    description,
+  });
 };
