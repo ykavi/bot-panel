@@ -1,6 +1,10 @@
 import { css } from 'styled-components';
 
 const globalCSS = css`
+  .ant-layout-sider-children ul {
+    padding-bottom: 50px;
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
