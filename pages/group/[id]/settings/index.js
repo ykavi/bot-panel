@@ -13,21 +13,21 @@ const Settings = () => {
   const { data, loading, error } = useGetFetch('group/-1001799280304/settings');
   console.log(data);
 
-  const isSelectBoxType = (displayName, description) => (
+  const isSelectBoxType = ({ displayName, description, options, value }) => (
     <>
       <MenuItemCard title={displayName} description={description}>
-        <SelectBox handleOnSelect={handleOnSelect} label={displayName} />
+        <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
       </MenuItemCard>
       <MenuItemCard title={displayName} description={description}>
-        <SelectBox handleOnSelect={handleOnSelect} label={displayName} />
+        <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
       </MenuItemCard>
       <MenuItemCard title={displayName} description={description}>
-        <SelectBox handleOnSelect={handleOnSelect} label={displayName} />
+        <SelectBox handleOnSelect={handleOnSelect} label={displayName} options={options} value={value} />
       </MenuItemCard>
     </>
   );
 
-  return <>{data?.GruopSettings?.map((item) => item.type === 'Listbox' && isSelectBoxType(item.displayName, item.description))}</>;
+  return <>{data?.GruopSettings?.map((item) => item.type === 'Listbox' && isSelectBoxType(item))}</>;
 };
 
 export const getServerSideProps = withIsPanelPage((context) => {});

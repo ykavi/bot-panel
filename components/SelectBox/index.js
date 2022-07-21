@@ -5,7 +5,14 @@ import { Container } from './style';
 const { Option } = Select;
 const { Title } = Typography;
 
-const SelectBox = ({ handleOnSelect, label }) => {
+const getOptions = (optionData) =>
+  optionData?.map((item) => (
+    <Option key={item} value={item}>
+      {item}
+    </Option>
+  ));
+
+const SelectBox = ({ handleOnSelect, label, options, value }) => {
   return (
     <Container>
       <ItemWrapper margin="16px 0 8px 0">
@@ -13,10 +20,8 @@ const SelectBox = ({ handleOnSelect, label }) => {
       </ItemWrapper>
 
       <Col xl={12} lg={12} md={24} sm={24}>
-        <Select onSelect={handleOnSelect} defaultValue="lucy">
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="Yiminghe">yiminghe</Option>
+        <Select onSelect={handleOnSelect} defaultValue={value || 'seçiniz'}>
+          {options && getOptions(options)}
         </Select>
       </Col>
     </Container>
