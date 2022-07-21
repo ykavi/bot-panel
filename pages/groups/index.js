@@ -57,8 +57,8 @@ const Groups = () => {
 
   if (error) return <NoResult />;
 
-  const getGroupItem = (group) => (
-    <Link href={`group/${group?.id}/settings`}>
+  const getGroupItem = (group, index) => (
+    <Link href={`group/${group?.id}/settings`} key={index}>
       <Col span={5} lg={6} md={8} sm={12} xs={12} key={group?.id}>
         <Container>
           <ItemWrapper margin="0 8px 16px 8px">
