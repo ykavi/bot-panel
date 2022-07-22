@@ -13,7 +13,7 @@ const items = [
   getMenuItem('Logout', 'logout'),
 ];
 
-const UserAvatar = () => {
+const UserAvatar = ({ isMobile }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const router = useRouter();
 
@@ -26,8 +26,8 @@ const UserAvatar = () => {
   return (
     <Container onClick={() => setMenuVisible(!menuVisible)}>
       <Avatar shape="circle" size="large" icon={<UserOutlined />} />
-      <Title level={5}>Yunus Emre Kavi</Title>
-      <CaretDownOutlined style={{ fontSize: '16px', color: '#ffffff' }} />
+      {!isMobile && <Title level={5}>Yunus Emre Kavi</Title>}
+      <CaretDownOutlined style={{ fontSize: isMobile ? '18px' : '16px', color: '#ffffff', marginLeft: 12 }} />
 
       {menuVisible && (
         <MenuWrapper onClick={(e) => e.stopPropagation()}>

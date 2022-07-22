@@ -18,7 +18,7 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
 
       <ThemeProvider theme={theme}>
-        <Layout>
+        <Layout {...pageProps}>
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>

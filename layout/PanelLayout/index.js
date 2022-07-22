@@ -8,11 +8,12 @@ import { useRouter } from 'next/router';
 import { setGroupSetting, setGroupId } from '../../redux/actions/main';
 import { useDispatch, useSelector } from 'react-redux';
 import { HeaderContentWrapper } from './style';
+import { AlignLeftOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
 
-const PanelLayout = ({ children }) => {
+const PanelLayout = ({ children, isMobile }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
@@ -80,32 +81,35 @@ const PanelLayout = ({ children }) => {
       }}
       hasSider
     >
-      <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'relative',
-          left: 0,
-          top: 0,
-          bottom: 0,
-        }}
-        width={250}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-      >
-        <div className="logo">
-          <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
-        </div>
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={[openedMenu]}
-          defaultOpenKeys={[openedMenu]}
-          mode="inline"
-          items={menuItem}
-          onSelect={onSelectHandle}
-        />
-      </Sider>
+      {!isMobile && (
+        <Sider
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'relative',
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+          width={250}
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+        >
+          <div className="logo">
+            <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
+          </div>
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={[openedMenu]}
+            defaultOpenKeys={[openedMenu]}
+            mode="inline"
+            items={menuItem}
+            onSelect={onSelectHandle}
+          />
+        </Sider>
+      )}
+
       <Layout className="site-layout">
         <Header
           className="site-layout-background"
@@ -114,7 +118,13 @@ const PanelLayout = ({ children }) => {
           }}
         >
           <HeaderContentWrapper>
-            <UserAvatar />
+            <AlignLeftOutlined style={{ fontSize: 28, color: '#ffffff' }} />
+
+            <div className="logo">
+              <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
+            </div>
+
+            <UserAvatar isMobile={isMobile} />
           </HeaderContentWrapper>
         </Header>
         <Content

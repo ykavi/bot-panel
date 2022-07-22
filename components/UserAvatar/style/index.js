@@ -7,7 +7,7 @@ export const Container = styled.div`
   cursor: pointer;
 
   h5 {
-    margin: 0 12px 0 12px;
+    margin: 0 0 0 12px;
     color: #ffffff;
   }
 `;

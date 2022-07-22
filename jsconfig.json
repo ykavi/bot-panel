@@ -7,6 +7,7 @@
       "@layout": ["./layout"],
       "@theme": ["./theme"],
       "@mock": ["./mock"],
+      "@utils": ["./utils"],
       "@helpers": ["./utils/helpers"],
       "@enums": ["./enums"],
       "@hooks": ["./hooks"],
