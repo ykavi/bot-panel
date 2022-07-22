@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { UserAvatar } from '@components';
 import { PANEL_MENU_ICONS } from '@enums';
+import { getMenuItem } from '@helpers';
 import { useRouter } from 'next/router';
 import { setGroupSetting, setGroupId } from '../../redux/actions/main';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,15 +11,6 @@ import { HeaderContentWrapper } from './style';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
-
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
 
 const PanelLayout = ({ children }) => {
   const router = useRouter();
@@ -53,19 +45,19 @@ const PanelLayout = ({ children }) => {
     let subManagement = [];
 
     groupSetting?.ControlPanel?.forEach((item) => {
-      controlPanelData.push(getItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
+      controlPanelData.push(getMenuItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
     });
 
     groupSetting?.Management?.forEach((item, index) => {
       if (item?.Fields.length) {
         item?.Fields?.forEach((subItem) => {
-          subManagement.push(getItem(subItem?.Name, subItem?.URL, PANEL_MENU_ICONS[subItem?.URL]));
+          subManagement.push(getMenuItem(subItem?.Name, subItem?.URL, PANEL_MENU_ICONS[subItem?.URL]));
         });
         const collapseKey = [...subManagement.map((i) => i.key)].includes(openedMenu) ? openedMenu : index;
-        management.push(getItem(item?.Name, collapseKey, PANEL_MENU_ICONS[item?.Name], subManagement));
+        management.push(getMenuItem(item?.Name, collapseKey, PANEL_MENU_ICONS[item?.Name], subManagement));
         subManagement = [];
       } else {
-        management.push(getItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
+        management.push(getMenuItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
       }
     });
     setMenuItem([...controlPanelData, ...management]);
@@ -103,7 +95,7 @@ const PanelLayout = ({ children }) => {
         onCollapse={(value) => setCollapsed(value)}
       >
         <div className="logo">
-          <img style={{ height: 70 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
+          <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
         </div>
         <Menu
           theme="dark"

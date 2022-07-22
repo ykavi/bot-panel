@@ -15,3 +15,12 @@ export const openNotificationWithIcon = (type, message, description) => {
     description,
   });
 };
+
+export const getMenuItem = (label, key, icon, children) => {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+};
