@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+const Container = styled.div`
   .ant-card-cover {
     height: 254px;
 
@@ -9,3 +9,5 @@ export const Container = styled.div`
     }
   }
 `;
+
+export default Container;

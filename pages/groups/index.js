@@ -4,7 +4,7 @@ import { useGetFetch } from '@hooks';
 import { getFirstLetters } from '@helpers';
 import { UserOutlined, CopyOutlined } from '@ant-design/icons';
 import { ItemWrapper, NImage, Text, Placeholder, NoResult } from '@components';
-import { Container } from './style';
+import Container from './style';
 import Link from 'next/link';
 import { withIsPanelPage } from '@hocs';
 
