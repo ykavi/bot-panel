@@ -1,19 +1,27 @@
 import { useState } from 'react';
 import { Avatar, Typography, Menu } from 'antd';
-import { UserOutlined, CaretDownOutlined, MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { getMenuItem } from '@helpers';
 import { Container, MenuWrapper } from './style';
+import { useRouter } from 'next/router';
 
 const { Title } = Typography;
 
-const items = [getMenuItem('Servers', 'servers'), getMenuItem('Language', 'language'), getMenuItem('Logout', 'logout')];
-
-const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
-  console.log(item, key, keyPath, selectedKeys, domEvent);
-};
+const items = [
+  getMenuItem('Servers', 'groups'),
+  getMenuItem('Language', 'language', null, [getMenuItem('Türkçe', 'tr'), getMenuItem('English', 'en')]),
+  getMenuItem('Logout', 'logout'),
+];
 
 const UserAvatar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const router = useRouter();
+
+  const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    console.log(item, key, keyPath, selectedKeys, domEvent);
+    //const url = `/${key}`;
+    //router.push(url);
+  };
 
   return (
     <Container onClick={() => setMenuVisible(!menuVisible)}>
