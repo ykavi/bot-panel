@@ -1,4 +1,4 @@
-import { Layout, Menu, Typography } from 'antd';
+import { Layout, Menu, Typography, Drawer } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
 import { UserAvatar } from '@components';
@@ -7,8 +7,8 @@ import { getMenuItem } from '@helpers';
 import { useRouter } from 'next/router';
 import { setGroupSetting, setGroupId } from '../../redux/actions/main';
 import { useDispatch, useSelector } from 'react-redux';
-import { HeaderContentWrapper } from './style';
-import { AlignLeftOutlined } from '@ant-design/icons';
+import { HeaderContentWrapper, DrawerWrapper } from './style';
+import { AlignLeftOutlined, CloseOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
@@ -23,6 +23,16 @@ const PanelLayout = ({ children, isMobile }) => {
   const { asPath } = router;
   const { id } = router.query;
   const { data, loading, error } = useGetFetch(`group/${id}`);
+
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
   useEffect(() => {
     const splitAsPath = asPath.split('/');
@@ -68,9 +78,10 @@ const PanelLayout = ({ children, isMobile }) => {
     setActiveMenuDisplayName(domEvent.target.innerHTML);
     const { id } = router.query;
     const url = `/group/${id}/${key}`;
-    router.push(url);
+    onClose();
+    router.push(url).then();
   };
-  console.log(isMobile);
+
   if (loading) return <p>loading</p>;
   if (error) return null;
 
@@ -120,7 +131,7 @@ const PanelLayout = ({ children, isMobile }) => {
           <HeaderContentWrapper isMobile={isMobile}>
             {isMobile && (
               <>
-                <AlignLeftOutlined style={{ fontSize: 28, color: '#ffffff' }} />
+                <AlignLeftOutlined style={{ fontSize: 28, color: '#ffffff' }} onClick={showDrawer} />
                 <div className="logo">
                   <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
                 </div>
@@ -157,6 +168,26 @@ const PanelLayout = ({ children, isMobile }) => {
           }}
         ></Footer>
       </Layout>
+
+      <DrawerWrapper>
+        <Drawer placement="left" closable={false} onClose={onClose} visible={visible} key="left" bodyStyle={{ padding: 0, background: '#001529' }}>
+          <div
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px 0 0', borderBottom: '1px solid #eee' }}
+          >
+            <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
+            <CloseOutlined style={{ fontSize: 24, color: 'white' }} onClick={onClose} />
+          </div>
+
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={[openedMenu]}
+            defaultOpenKeys={[openedMenu]}
+            mode="inline"
+            items={menuItem}
+            onSelect={onSelectHandle}
+          />
+        </Drawer>
+      </DrawerWrapper>
     </Layout>
   );
 };

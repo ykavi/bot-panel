@@ -7,3 +7,5 @@ export const HeaderContentWrapper = styled.div`
   height: 100%;
   align-items: center;
 `;
+
+export const DrawerWrapper = styled.div``;
