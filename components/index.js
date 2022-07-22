@@ -13,6 +13,7 @@ import MenuItemCard from './MenuItemCard';
 import SelectBox from './SelectBox';
 import Switch from './Switch';
 import PanelMenuTypes from './PanelMenuTypes';
+import UserAvatar from './UserAvatar';
 
 export {
   Header,
@@ -30,4 +31,5 @@ export {
   SelectBox,
   Switch,
   PanelMenuTypes,
+  UserAvatar,
 };

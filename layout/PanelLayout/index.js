@@ -1,10 +1,12 @@
 import { Layout, Menu, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useGetFetch } from '@hooks';
+import { UserAvatar } from '@components';
 import { PANEL_MENU_ICONS } from '@enums';
 import { useRouter } from 'next/router';
 import { setGroupSetting, setGroupId } from '../../redux/actions/main';
 import { useDispatch, useSelector } from 'react-redux';
+import { HeaderContentWrapper } from './style';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
@@ -100,7 +102,9 @@ const PanelLayout = ({ children }) => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <div className="logo">LOGO</div>
+        <div className="logo">
+          <img style={{ height: 70 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
+        </div>
         <Menu
           theme="dark"
           defaultSelectedKeys={[openedMenu]}
@@ -116,7 +120,11 @@ const PanelLayout = ({ children }) => {
           style={{
             padding: 0,
           }}
-        />
+        >
+          <HeaderContentWrapper>
+            <UserAvatar />
+          </HeaderContentWrapper>
+        </Header>
         <Content
           style={{
             margin: '0 16px',
