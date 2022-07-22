@@ -70,7 +70,7 @@ const PanelLayout = ({ children, isMobile }) => {
     const url = `/group/${id}/${key}`;
     router.push(url);
   };
-
+  console.log(isMobile);
   if (loading) return <p>loading</p>;
   if (error) return null;
 
@@ -117,12 +117,15 @@ const PanelLayout = ({ children, isMobile }) => {
             padding: 0,
           }}
         >
-          <HeaderContentWrapper>
-            <AlignLeftOutlined style={{ fontSize: 28, color: '#ffffff' }} />
-
-            <div className="logo">
-              <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
-            </div>
+          <HeaderContentWrapper isMobile={isMobile}>
+            {isMobile && (
+              <>
+                <AlignLeftOutlined style={{ fontSize: 28, color: '#ffffff' }} />
+                <div className="logo">
+                  <img style={{ height: 60 }} src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-200.png" />
+                </div>
+              </>
+            )}
 
             <UserAvatar isMobile={isMobile} />
           </HeaderContentWrapper>
