@@ -132,7 +132,7 @@ const PanelLayout = ({ children, isMobile }) => {
         </Header>
         <Content
           style={{
-            margin: '0 16px',
+            margin: isMobile ? '0' : '0 16px',
             height: '100vh',
             overflow: 'auto',
           }}
@@ -140,7 +140,7 @@ const PanelLayout = ({ children, isMobile }) => {
           <div
             className="site-layout-background"
             style={{
-              padding: 24,
+              padding: isMobile ? 8 : 24,
               paddingBottom: 64,
               minHeight: 360,
             }}
