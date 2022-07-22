@@ -1,4 +1,4 @@
-import { MenuItemCard } from '@components';
+import { MenuItemCard, ItemWrapper } from '@components';
 import { Button, Col, Input } from 'antd';
 import { useState } from 'react';
 
@@ -12,18 +12,18 @@ const TextBoxType = ({ displayName, description, value, name, action }) => {
   };
 
   return (
-    <>
-      <MenuItemCard title={displayName} description={description}>
+    <MenuItemCard title={displayName} description={description}>
+      <ItemWrapper margin="16px 0 0 0">
         <Col lg={12}>
           <Input.Group compact>
-            <Input style={{ width: 'calc(100% - 200px)' }} defaultValue="https://ant.design" onChange={(e) => onChangeInputHandle(e, name)} />
+            <Input style={{ width: 'calc(100% - 200px)' }} defaultValue={value} onChange={(e) => onChangeInputHandle(e, name)} />
             <Button type="primary" onClick={() => action(inputValues[name])} disabled={!inputValues[name]}>
               Kaydet
             </Button>
           </Input.Group>
         </Col>
-      </MenuItemCard>
-    </>
+      </ItemWrapper>
+    </MenuItemCard>
   );
 };
 
