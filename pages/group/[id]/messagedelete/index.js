@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const MessageDelete = () => {
   const { data, loading, error } = useMenuItemGetFetch('reports/messagedelete');
-  console.log('*****', data);
 
   return (
     <>

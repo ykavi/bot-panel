@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const AdvancedSettings = () => {
   const { data, loading, error } = useMenuItemGetFetch('newmembers/advancedsettings');
-  console.log('*****', data);
 
   return (
     <>

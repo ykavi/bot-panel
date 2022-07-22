@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const UnFilteredMessages = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/unfilteredmessages');
-  console.log('*****', data);
 
   return (
     <>

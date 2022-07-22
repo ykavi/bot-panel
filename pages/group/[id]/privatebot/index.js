@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Privatebot = () => {
   const { data, loading, error } = useMenuItemGetFetch('privatebot');
-  console.log('*****', data);
 
   return (
     <>

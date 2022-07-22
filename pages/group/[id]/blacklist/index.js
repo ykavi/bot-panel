@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const BlackList = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/blacklist');
-  console.log('*****', data);
 
   return (
     <>

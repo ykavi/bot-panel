@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const General = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/general'); //TODO: Data tipi digerlerinden farklı onurla konusalacak.
-  console.log('*****', data);
 
   return (
     <>

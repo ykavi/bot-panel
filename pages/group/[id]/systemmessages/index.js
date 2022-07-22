@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const SystemMessages = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/systemmessages');
-  console.log('*****', data);
 
   return (
     <>

@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Warn = () => {
   const { data, loading, error } = useMenuItemGetFetch('reports/warn');
-  console.log('*****', data);
 
   return (
     <>

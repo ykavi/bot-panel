@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const BasicSettings = () => {
   const { data, loading, error } = useMenuItemGetFetch('basicsettings');
-  console.log('*****', data);
 
   return (
     <>

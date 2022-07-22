@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const AdvancedFilter = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/advancedfilter'); //TODO: data tipinda ufak bi kırılım var içeri girmek gerekecek.
-  console.log('*****', data);
 
   return (
     <>

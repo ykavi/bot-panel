@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const RateLimiter = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/ratelimiter');
-  console.log('*****', data);
 
   return (
     <>

@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Block = () => {
   const { data, loading, error } = useMenuItemGetFetch('reports/block');
-  console.log('*****', data);
 
   return (
     <>

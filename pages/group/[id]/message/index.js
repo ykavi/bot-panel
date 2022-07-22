@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Message = () => {
   const { data, loading, error } = useMenuItemGetFetch('antispam/message');
-  console.log('*****', data);
 
   return (
     <>

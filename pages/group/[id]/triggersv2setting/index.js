@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const TriggersV2Setting = () => {
   const { data, loading, error } = useMenuItemGetFetch('triggersv2setting');
-  console.log('*****', data);
 
   return (
     <>

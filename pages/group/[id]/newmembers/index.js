@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const NewMembers = () => {
   const { data, loading, error } = useMenuItemGetFetch('antispam/newmembers');
-  console.log('*****', data);
 
   return (
     <>

@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Reputation = () => {
   const { data, loading, error } = useMenuItemGetFetch('fun/reputation');
-  console.log('*****', data);
 
   return (
     <>

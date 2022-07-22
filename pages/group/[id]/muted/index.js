@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Muted = () => {
   const { data, loading, error } = useMenuItemGetFetch('reports/muted');
-  console.log('*****', data);
 
   return (
     <>

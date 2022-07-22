@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const LevelSandXp = () => {
   const { data, loading, error } = useMenuItemGetFetch('fun/levelsandxp'); //TODO: data tipi kırılımlı buna bakılacak
-  console.log('*****', data);
 
   return (
     <>

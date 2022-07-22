@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Welcome = () => {
   const { data, loading, error } = useMenuItemGetFetch('newmembers/welcome');
-  console.log('*****', data);
 
   return (
     <>

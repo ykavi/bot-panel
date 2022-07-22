@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Crypto = () => {
   const { data, loading, error } = useMenuItemGetFetch('fun/crypto');
-  console.log('*****', data);
 
   return (
     <>

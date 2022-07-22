@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const ChannelRecords = () => {
   const { data, loading, error } = useMenuItemGetFetch('channelrecords');
-  console.log('*****', data);
 
   return (
     <>

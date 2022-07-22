@@ -18,7 +18,6 @@ const textBoxAction = (inputName) => {
 
 const Principles = () => {
   const { data, loading, error } = useMenuItemGetFetch('newmembers/principles');
-  console.log('*****', data);
 
   return (
     <>
