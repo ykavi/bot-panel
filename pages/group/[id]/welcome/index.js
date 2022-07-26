@@ -21,7 +21,7 @@ const Welcome = () => {
 
   return (
     <>
-      {data?.GruopNewMembers?.map((item, index) => (
+      {data?.Welcome?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

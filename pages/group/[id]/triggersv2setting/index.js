@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const TriggersV2Setting = () => {
   const { data, loading, error } = useMenuItemGetFetch('triggersv2setting');
-
+  console.log(data);
   return (
     <>
-      {data?.GruopTriggersV2Setting?.map((item, index) => (
+      {data?.TriggersV2Setting?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

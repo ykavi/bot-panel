@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const Warn = () => {
   const { data, loading, error } = useMenuItemGetFetch('reports/warn');
-
+  console.log(data);
   return (
     <>
-      {data?.GruopReports?.map((item, index) => (
+      {data?.Warn?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

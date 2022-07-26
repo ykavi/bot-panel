@@ -21,7 +21,7 @@ const AdvancedFilter = () => {
 
   return (
     <>
-      {data?.GruopFilter?.map((item, index) => (
+      {data?.AdvancedFilter?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

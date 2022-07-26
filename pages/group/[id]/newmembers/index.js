@@ -21,7 +21,7 @@ const NewMembers = () => {
 
   return (
     <>
-      {data?.GruopAntiSpam?.map((item, index) => (
+      {data?.NewMembers?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

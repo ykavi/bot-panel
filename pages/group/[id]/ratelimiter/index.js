@@ -21,7 +21,7 @@ const RateLimiter = () => {
 
   return (
     <>
-      {data?.GruopFilter?.map((item, index) => (
+      {data?.RateLimiter?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

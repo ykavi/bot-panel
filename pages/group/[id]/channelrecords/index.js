@@ -21,7 +21,7 @@ const ChannelRecords = () => {
 
   return (
     <>
-      {data?.GruopChannelRecords?.map((item, index) => (
+      {data?.ChannelRecords?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

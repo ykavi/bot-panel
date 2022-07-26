@@ -21,7 +21,7 @@ const Privatebot = () => {
 
   return (
     <>
-      {data?.GruopPrivateBot?.map((item, index) => (
+      {data?.PrivateBot?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

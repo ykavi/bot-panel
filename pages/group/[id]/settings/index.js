@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const Settings = () => {
   const { data, loading, error } = useMenuItemGetFetch(`settings`);
-
+  console.log(data);
   return (
     <>
-      {data?.GruopSettings?.map((item, index) => (
+      {data?.Settings?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

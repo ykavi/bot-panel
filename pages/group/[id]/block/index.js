@@ -21,7 +21,7 @@ const Block = () => {
 
   return (
     <>
-      {data?.GruopReports?.map((item, index) => (
+      {data?.Block?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const LevelSandXp = () => {
   const { data, loading, error } = useMenuItemGetFetch('fun/levelsandxp'); //TODO: data tipi kırılımlı buna bakılacak
-
+  console.log(data);
   return (
     <>
-      {data?.GruopFun?.map((item, index) => (
+      {data?.LevelsAndXp?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

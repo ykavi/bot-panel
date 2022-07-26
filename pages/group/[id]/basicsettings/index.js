@@ -21,7 +21,7 @@ const BasicSettings = () => {
 
   return (
     <>
-      {data?.GruopBasicSettings?.map((item, index) => (
+      {data?.BasicSettings?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

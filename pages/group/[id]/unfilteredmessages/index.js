@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const UnFilteredMessages = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/unfilteredmessages');
-
+  console.log(data);
   return (
     <>
-      {data?.GruopFilter?.map((item, index) => (
+      {data?.UnfilteredMessages?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

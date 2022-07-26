@@ -21,7 +21,7 @@ const Announcements = () => {
 
   return (
     <>
-      {data?.GruopAnnouncements?.map((item, index) => (
+      {data?.Announcements?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

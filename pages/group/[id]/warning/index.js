@@ -21,7 +21,7 @@ const Warning = () => {
 
   return (
     <>
-      {data?.GruopWarning?.map((item, index) => (
+      {data?.Warning?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

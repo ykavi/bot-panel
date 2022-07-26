@@ -21,7 +21,7 @@ const Crypto = () => {
 
   return (
     <>
-      {data?.GruopFun?.map((item, index) => (
+      {data?.Crypto?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const BlackList = () => {
   const { data, loading, error } = useMenuItemGetFetch('filter/blacklist');
-
+  console.log(data);
   return (
     <>
-      {data?.GruopFilter?.map((item, index) => (
+      {data?.Blacklist?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

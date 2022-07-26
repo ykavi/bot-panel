@@ -21,7 +21,7 @@ const Muted = () => {
 
   return (
     <>
-      {data?.GruopReports?.map((item, index) => (
+      {data?.Muted?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

@@ -21,7 +21,7 @@ const MessageDelete = () => {
 
   return (
     <>
-      {data?.GruopReports?.map((item, index) => (
+      {data?.MessageDelete?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

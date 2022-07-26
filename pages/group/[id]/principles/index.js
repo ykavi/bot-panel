@@ -18,10 +18,10 @@ const textBoxAction = (inputName) => {
 
 const Principles = () => {
   const { data, loading, error } = useMenuItemGetFetch('newmembers/principles');
-
+  console.log(data);
   return (
     <>
-      {data?.GruopNewMembers?.map((item, index) => (
+      {data?.Principles?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>

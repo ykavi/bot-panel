@@ -21,7 +21,7 @@ const Reputation = () => {
 
   return (
     <>
-      {data?.GruopFun?.map((item, index) => (
+      {data?.Reputation?.map((item, index) => (
         <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>
