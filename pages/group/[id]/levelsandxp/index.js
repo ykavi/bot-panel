@@ -22,13 +22,7 @@ const LevelSandXp = () => {
   return (
     <>
       {data?.LevelsAndXp?.map((item, index) => (
-        <>
-          <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
-          {item.isSub &&
-            item.value.map((subItem, subIndex) => (
-              <div key={subIndex}>{PanelMenuTypes(subItem.type, subItem, listBoxAction, switchAction, textBoxAction)}</div>
-            ))}
-        </>
+        <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
       ))}
     </>
   );
