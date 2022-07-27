@@ -11,6 +11,10 @@ const switchAction = (value) => {
   console.log(`switchAction ${value}`);
 };
 
+const rootSwitchAction = (value) => {
+  console.log(`rootSwitchAction ${value}`);
+};
+
 const textBoxAction = (inputName) => {
   openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
   console.log('textBoxAction', inputName);
@@ -22,7 +26,16 @@ const Reputation = () => {
   return (
     <>
       {data?.Reputation?.map((item, index) => (
-        <div key={index}>{PanelMenuTypes(item.type, item, listBoxAction, switchAction, textBoxAction)}</div>
+        <div key={index}>
+          <PanelMenuTypes
+            type={item.type}
+            data={item}
+            listBoxAction={listBoxAction}
+            switchAction={switchAction}
+            textBoxAction={textBoxAction}
+            rootSwitchAction={rootSwitchAction}
+          />
+        </div>
       ))}
     </>
   );

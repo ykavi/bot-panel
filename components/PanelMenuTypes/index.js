@@ -29,14 +29,22 @@ const collapsedMenu = (item, listBoxAction, switchAction, textBoxAction) => {
     <Collapse style={{ margin: '20px 0' }}>
       <Panel header={collapseTitle} key={item.name}>
         {panelData.map((subItem, subIndex) => (
-          <div key={subIndex}>{PanelMenuTypes(subItem.type, subItem, listBoxAction, switchAction, textBoxAction)}</div>
+          <div key={subIndex}>
+            <PanelMenuTypes
+              type={subItem.type}
+              data={subItem}
+              listBoxAction={listBoxAction}
+              switchAction={switchAction}
+              textBoxAction={textBoxAction}
+            />
+          </div>
         ))}
       </Panel>
     </Collapse>
   );
 };
 
-const PanelMenuTypes = (type, data, listBoxAction, switchAction, textBoxAction) => {
+const PanelMenuTypes = ({ type, data, listBoxAction, switchAction, textBoxAction, rootSwitchAction }) => {
   const menuItem = getComponentByType(type, data, listBoxAction, switchAction, textBoxAction);
 
   const renderedItem =
@@ -47,7 +55,7 @@ const PanelMenuTypes = (type, data, listBoxAction, switchAction, textBoxAction) 
             {data.displayName}
           </Title>
 
-          <Switch style={{ marginLeft: 12 }} defaultChecked={data.value} />
+          <Switch style={{ marginLeft: 12 }} defaultChecked={data.value} onChange={rootSwitchAction} />
         </ItemWrapper>
         {menuItem}
       </>
@@ -55,7 +63,7 @@ const PanelMenuTypes = (type, data, listBoxAction, switchAction, textBoxAction) 
       menuItem
     );
 
-  return data.isSub ? collapsedMenu(data, listBoxAction, switchAction, textBoxAction) : renderedItem;
+  return data?.isSub ? collapsedMenu(data, listBoxAction, switchAction, textBoxAction) : renderedItem;
 };
 
 export default PanelMenuTypes;
