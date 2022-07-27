@@ -75,7 +75,7 @@ const PanelLayout = ({ children, isMobile }) => {
   }, [groupSetting]);
 
   const onSelectHandle = ({ item, key, keyPath, selectedKeys, domEvent }) => {
-    setActiveMenuDisplayName(domEvent.target.innerHTML);
+    //setActiveMenuDisplayName(domEvent.target.innerHTML);
     const { id } = router.query;
     const url = `/group/${id}/${key}`;
     onClose();
