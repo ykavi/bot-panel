@@ -10,21 +10,21 @@ import { useRouter } from 'next/router';
 const { Panel } = Collapse;
 const { Title } = Typography;
 
-const getComponentByType = (type, data, listBoxAction, switchAction, textBoxAction) => {
+const getComponentByType = (type, data, setDataAction) => {
   switch (type) {
     case 'Listbox':
-      return <SelectBoxType {...data} action={listBoxAction} />;
+      return <SelectBoxType {...data} action={setDataAction} />;
     case 'Switch Button':
-      return <SwitchType {...data} action={switchAction} />;
+      return <SwitchType {...data} action={setDataAction} />;
     case 'Textbox':
-      return <TextBoxType {...data} action={textBoxAction} />;
+      return <TextBoxType {...data} action={setDataAction} />;
 
     default:
       return null;
   }
 };
 
-const collapsedMenu = (item, listBoxAction, switchAction, textBoxAction) => {
+const collapsedMenu = (item, setDataAction) => {
   const collapseTitle = item.value.find((i) => i.type === 'Root Switch')?.displayName;
   const panelData = item.value.filter((i) => i.type !== 'Root Switch');
 
@@ -36,9 +36,9 @@ const collapsedMenu = (item, listBoxAction, switchAction, textBoxAction) => {
             <PanelMenuTypes
               type={subItem.type}
               data={subItem}
-              listBoxAction={listBoxAction}
-              switchAction={switchAction}
-              textBoxAction={textBoxAction}
+              listBoxAction={setDataAction}
+              switchAction={setDataAction}
+              textBoxAction={setDataAction}
             />
           </div>
         ))}
@@ -47,7 +47,7 @@ const collapsedMenu = (item, listBoxAction, switchAction, textBoxAction) => {
   );
 };
 
-const PanelMenuTypes = ({ type, data, switchAction, textBoxAction, rootSwitchAction }) => {
+const PanelMenuTypes = ({ type, data }) => {
   const router = useRouter();
   const { asPath } = router;
   const [endpoint, setEndpoint] = useState('');
@@ -61,12 +61,11 @@ const PanelMenuTypes = ({ type, data, switchAction, textBoxAction, rootSwitchAct
     setEndpoint(pageEndPoint);
   }, [asPath]);
 
-  const listBoxAction = (value) => {
-    console.log(`PANEL ${value} ${data.name}`);
-    console.log(`PANEL`, data);
+  const setDataAction = (value) => {
     setBody({ [data.name]: value });
   };
-  const menuItem = getComponentByType(type, data, listBoxAction, listBoxAction, textBoxAction);
+
+  const menuItem = getComponentByType(type, data, setDataAction);
 
   const renderedItem =
     type === 'Root Switch' ? (
@@ -76,7 +75,7 @@ const PanelMenuTypes = ({ type, data, switchAction, textBoxAction, rootSwitchAct
             {data.displayName}
           </Title>
 
-          <Switch style={{ marginLeft: 12 }} defaultChecked={data.value} onChange={rootSwitchAction} />
+          <Switch style={{ marginLeft: 12 }} defaultChecked={data.value} onChange={setDataAction} />
         </ItemWrapper>
         {menuItem}
       </>
@@ -84,7 +83,7 @@ const PanelMenuTypes = ({ type, data, switchAction, textBoxAction, rootSwitchAct
       menuItem
     );
 
-  return data?.isSub ? collapsedMenu(data, listBoxAction, switchAction, textBoxAction) : renderedItem;
+  return data?.isSub ? collapsedMenu(data, setDataAction) : renderedItem;
 };
 
 export default PanelMenuTypes;
