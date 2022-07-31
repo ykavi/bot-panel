@@ -3,6 +3,9 @@ import TextBoxType from './TextBoxType';
 import SelectBoxType from './SelectBoxType';
 import { Collapse, Typography, Switch } from 'antd';
 import { ItemWrapper } from '@components';
+import { useEffect, useState } from 'react';
+import { useMenuItemPostFetch } from '@hooks';
+import { useRouter } from 'next/router';
 
 const { Panel } = Collapse;
 const { Title } = Typography;
@@ -44,8 +47,26 @@ const collapsedMenu = (item, listBoxAction, switchAction, textBoxAction) => {
   );
 };
 
-const PanelMenuTypes = ({ type, data, listBoxAction, switchAction, textBoxAction, rootSwitchAction }) => {
-  const menuItem = getComponentByType(type, data, listBoxAction, switchAction, textBoxAction);
+const PanelMenuTypes = ({ type, data, switchAction, textBoxAction, rootSwitchAction }) => {
+  const router = useRouter();
+  const { asPath } = router;
+  const [endpoint, setEndpoint] = useState('');
+  const [body, setBody] = useState(null);
+
+  const { isSuccess, loading: postLoading, error: postErr } = useMenuItemPostFetch(endpoint, body);
+
+  useEffect(() => {
+    const splitAsPath = asPath.split('/');
+    const pageEndPoint = splitAsPath[splitAsPath.length - 1];
+    setEndpoint(pageEndPoint);
+  }, [asPath]);
+
+  const listBoxAction = (value) => {
+    console.log(`PANEL ${value} ${data.name}`);
+    console.log(`PANEL`, data);
+    setBody({ [data.name]: value });
+  };
+  const menuItem = getComponentByType(type, data, listBoxAction, listBoxAction, textBoxAction);
 
   const renderedItem =
     type === 'Root Switch' ? (

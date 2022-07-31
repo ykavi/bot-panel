@@ -2,27 +2,32 @@ import { withIsPanelPage } from '@hocs';
 import { useMenuItemGetFetch, useMenuItemPostFetch } from '@hooks';
 import { openNotificationWithIcon } from '@helpers';
 import { PanelMenuTypes } from '@components';
-
-const listBoxAction = (value) => {
-  console.log(`listBoxAction ${value}`);
-};
-
-const switchAction = (value) => {
-  console.log(`switchAction ${value}`);
-};
+import { useState } from 'react';
 
 const rootSwitchAction = (value) => {
   console.log(`rootSwitchAction ${value}`);
 };
 
-const textBoxAction = (inputName) => {
-  openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
-  console.log('textBoxAction', inputName);
-};
-
 const Settings = () => {
+  const [body, setBody] = useState(null);
   const { data, loading, error } = useMenuItemGetFetch(`settings`);
-  const { isSuccess, loading: postLoading, error: postErr } = useMenuItemPostFetch(`settings`, { TimeZone: 'EMREEMRE' });
+  const { isSuccess, loading: postLoading, error: postErr } = useMenuItemPostFetch(`settings`, body);
+
+  const listBoxAction = (value, key) => {
+    console.log(`listBoxAction ${value} ${key}`);
+    setBody({ [key]: value });
+  };
+
+  const switchAction = (value, key) => {
+    console.log(`switchAction ${value} ${key}`);
+    setBody({ [key]: value });
+  };
+
+  const textBoxAction = (value, key) => {
+    openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
+    console.log(`textBoxAction ${value} ${key}`);
+    setBody({ [key]: value });
+  };
 
   return (
     <>
@@ -31,9 +36,9 @@ const Settings = () => {
           <PanelMenuTypes
             type={item.type}
             data={item}
-            listBoxAction={listBoxAction}
-            switchAction={switchAction}
-            textBoxAction={textBoxAction}
+            listBoxAction={(e) => listBoxAction(e, item?.name)}
+            switchAction={(e) => switchAction(e, item?.name)}
+            textBoxAction={(e) => textBoxAction(e, item?.name)}
             rootSwitchAction={rootSwitchAction}
           />
         </div>

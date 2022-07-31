@@ -10,6 +10,8 @@ const useMenuItemPostFetch = (endPoint, body) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    if (!body) return;
+
     fetch(`${URL}/group/${groupId}/${endPoint}`, {
       method: 'POST',
       headers: {
