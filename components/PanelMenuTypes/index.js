@@ -65,8 +65,12 @@ const PanelMenuTypes = ({ type, data }) => {
   const setDataAction = (value) => {
     console.log({ [data.name]: value, elmType: type });
     setBody({ [data.name]: value });
-    isSuccess && openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
   };
+
+  useEffect(() => {
+    if (!isSuccess || postLoading) return;
+    openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
+  }, [isSuccess, body, postLoading]);
 
   const menuItem = getComponentByType(type, data, setDataAction);
 
