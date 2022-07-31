@@ -1,5 +1,5 @@
 import { withIsPanelPage } from '@hocs';
-import { useMenuItemGetFetch } from '@hooks';
+import { useMenuItemGetFetch, useMenuItemPostFetch } from '@hooks';
 import { openNotificationWithIcon } from '@helpers';
 import { PanelMenuTypes } from '@components';
 
@@ -22,7 +22,8 @@ const textBoxAction = (inputName) => {
 
 const Settings = () => {
   const { data, loading, error } = useMenuItemGetFetch(`settings`);
-  console.log(data);
+  const { isSuccess, loading: postLoading, error: postErr } = useMenuItemPostFetch(`settings`, { TimeZone: 'EMREEMRE' });
+
   return (
     <>
       {data?.Settings?.map((item, index) => (
