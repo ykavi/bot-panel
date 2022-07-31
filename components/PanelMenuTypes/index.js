@@ -6,6 +6,7 @@ import { ItemWrapper } from '@components';
 import { useEffect, useState } from 'react';
 import { useMenuItemPostFetch } from '@hooks';
 import { useRouter } from 'next/router';
+import { openNotificationWithIcon } from '@helpers';
 
 const { Panel } = Collapse;
 const { Title } = Typography;
@@ -62,7 +63,9 @@ const PanelMenuTypes = ({ type, data }) => {
   }, [asPath]);
 
   const setDataAction = (value) => {
+    console.log({ [data.name]: value, elmType: type });
     setBody({ [data.name]: value });
+    isSuccess && openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
   };
 
   const menuItem = getComponentByType(type, data, setDataAction);
