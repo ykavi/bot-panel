@@ -34,13 +34,7 @@ const collapsedMenu = (item, setDataAction) => {
       <Panel header={collapseTitle} key={item.name}>
         {panelData.map((subItem, subIndex) => (
           <div key={subIndex}>
-            <PanelMenuTypes
-              type={subItem.type}
-              data={subItem}
-              listBoxAction={setDataAction}
-              switchAction={setDataAction}
-              textBoxAction={setDataAction}
-            />
+            <PanelMenuTypes type={subItem.type} data={subItem} />
           </div>
         ))}
       </Panel>
