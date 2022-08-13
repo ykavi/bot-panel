@@ -41,8 +41,9 @@ const PanelLayout = ({ children, isMobile }) => {
   }, [asPath]);
 
   useEffect(() => {
-    if (data?.success && data?.GruopAllSettings) dispatch(setGroupSetting(data?.GruopAllSettings));
-  }, [data?.GruopAllSettings, data?.success]);
+    console.log(data?.GroupAllSettings);
+    if (data?.success && data?.GroupAllSettings) dispatch(setGroupSetting(data?.GroupAllSettings));
+  }, [data?.GroupAllSettings, data?.success]);
 
   useEffect(() => {
     if (id) dispatch(setGroupId(id));
