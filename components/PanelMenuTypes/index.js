@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useMenuItemPostFetch } from '@hooks';
 import { useRouter } from 'next/router';
 import { openNotificationWithIcon } from '@helpers';
+import { error } from 'next/dist/build/output/log';
 
 const { Panel } = Collapse;
 const { Title } = Typography;
@@ -62,9 +63,9 @@ const PanelMenuTypes = ({ type, data }) => {
   };
 
   useEffect(() => {
-    if (!isSuccess || postLoading) return;
-    openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
-  }, [isSuccess, body, postLoading]);
+    if (postErr) openNotificationWithIcon('error', 'Hata', 'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+    if (isSuccess) openNotificationWithIcon('success', 'Başarılı', 'Değişiklik Uygulandı');
+  }, [isSuccess, postErr, body]);
 
   const menuItem = getComponentByType(type, data, setDataAction);
 
