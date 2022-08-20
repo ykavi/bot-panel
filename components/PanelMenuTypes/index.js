@@ -35,7 +35,7 @@ const collapsedMenu = (item, setDataAction) => {
       <Panel header={collapseTitle} key={item.name}>
         {panelData.map((subItem, subIndex) => (
           <div key={subIndex}>
-            <PanelMenuTypes type={subItem.type} data={subItem} />
+            <PanelMenuTypes type={subItem.type} data={subItem} subName={item?.name} />
           </div>
         ))}
       </Panel>
@@ -43,12 +43,11 @@ const collapsedMenu = (item, setDataAction) => {
   );
 };
 
-const PanelMenuTypes = ({ type, data }) => {
+const PanelMenuTypes = ({ type, data, subName }) => {
   const router = useRouter();
   const { asPath } = router;
   const [endpoint, setEndpoint] = useState('');
   const [body, setBody] = useState(null);
-
   const { isSuccess, loading: postLoading, error: postErr } = useMenuItemPostFetch(endpoint, body);
 
   useEffect(() => {
@@ -58,8 +57,9 @@ const PanelMenuTypes = ({ type, data }) => {
   }, [asPath]);
 
   const setDataAction = (value) => {
-    console.log({ [data.name]: value, elmType: type });
-    setBody({ [data.name]: value });
+    const editBody = subName ? { [subName]: { [data.name]: value } } : { [data.name]: value };
+
+    setBody(editBody);
   };
 
   useEffect(() => {
