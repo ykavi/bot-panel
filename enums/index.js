@@ -30,6 +30,9 @@ import {
   BugOutlined,
   DingtalkOutlined,
   LineChartOutlined,
+  BarChartOutlined,
+  RiseOutlined,
+  EditOutlined,
 } from '@ant-design/icons';
 
 export const URL = 'http://46.101.203.185:3000/api/v1';
@@ -72,4 +75,9 @@ export const PANEL_MENU_ICONS = {
   Filtreler: <FilterOutlined />,
   Eğlence: <DingtalkOutlined />,
   Raporlar: <LineChartOutlined />,
+  stats: <BarChartOutlined />,
+  users: <TeamOutlined />,
+  rank: <RiseOutlined />,
+  invite: <FormOutlined />,
+  diary: <EditOutlined />,
 };

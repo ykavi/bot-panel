@@ -56,6 +56,10 @@ const PanelLayout = ({ children, isMobile }) => {
     let management = [];
     let subManagement = [];
 
+    groupSetting?.Stats?.forEach((item) => {
+      controlPanelData.push(getMenuItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
+    });
+
     groupSetting?.ControlPanel?.forEach((item) => {
       controlPanelData.push(getMenuItem(item?.Name, item?.URL, PANEL_MENU_ICONS[item?.URL]));
     });
