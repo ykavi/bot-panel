@@ -1,11 +1,9 @@
-import { PanelMenuTypes } from '@components';
 import { useMenuItemGetFetch } from '@hooks';
 import { withIsPanelPage } from '@hocs';
-import { openNotificationWithIcon } from '@helpers';
 import { Typography } from 'antd';
 import Script from 'next/script';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { Container } from './style';
 
 const { Title } = Typography;
 
@@ -23,7 +21,7 @@ const ActiveHours = ({ activeHours }) => {
         Aktif Saatler
       </Title>
 
-      <BarChart width={730} height={250} data={mappedActiveHours}>
+      <BarChart width={900} height={300} data={mappedActiveHours}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -38,7 +36,7 @@ const Messages = ({ messages }) => {
   const mappedMessages = messages?.map((item) => {
     return {
       name: item?.Date,
-      user: item?.Sum,
+      mesajlar: item?.Sum,
     };
   });
 
@@ -48,12 +46,12 @@ const Messages = ({ messages }) => {
         Mesajlar
       </Title>
 
-      <BarChart width={730} height={250} data={mappedMessages}>
+      <BarChart width={900} height={300} data={mappedMessages}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Bar dataKey="user" fill="#8884d8" />
+        <Bar dataKey="mesajlar" fill="#8884d8" />
       </BarChart>
     </>
   );
@@ -84,7 +82,7 @@ const Activity = ({ times, weeks }) => {
         Activity
       </Title>
 
-      <BarChart width={730} height={250} data={mappedTimes}>
+      <BarChart width={900} height={300} data={mappedTimes}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -92,7 +90,7 @@ const Activity = ({ times, weeks }) => {
         <Bar dataKey="user" fill="#8884d8" />
       </BarChart>
 
-      <BarChart width={730} height={250} data={mappedWeeks}>
+      <BarChart width={900} height={300} data={mappedWeeks}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -119,7 +117,7 @@ const UserChart = ({ userStats }) => {
         Kullanıcı İstatistikleri
       </Title>
 
-      <BarChart width={730} height={250} data={mappedUserStats}>
+      <BarChart width={900} height={300} data={mappedUserStats}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -136,7 +134,7 @@ const Stats = () => {
   const { data, loading, error } = useMenuItemGetFetch('stats');
 
   return (
-    <>
+    <Container>
       <ActiveHours activeHours={data?.GroupStat?.activeHours} />
 
       <Activity times={data?.GroupStat?.activity?.Times} weeks={data?.GroupStat?.activity?.Weeks} />
@@ -149,7 +147,7 @@ const Stats = () => {
       <Script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" />
       <Script src="https://unpkg.com/prop-types/prop-types.min.js" />
       <Script src="https://unpkg.com/recharts/umd/Recharts.js" />
-    </>
+    </Container>
   );
 };
 
