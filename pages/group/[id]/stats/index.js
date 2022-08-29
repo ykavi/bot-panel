@@ -103,9 +103,37 @@ const Activity = ({ times, weeks }) => {
   );
 };
 
+const UserChart = ({ userStats }) => {
+  const mappedUserStats = userStats?.map((item) => {
+    return {
+      name: item?.Date,
+      'Eski Kullanıcı': item?.Users,
+      'Yeni Kullanıcı': item?.NewUsers,
+      amt: item?.Users,
+    };
+  });
+
+  return (
+    <>
+      <Title level={4} style={{ marginBottom: 24 }}>
+        Kullanıcı İstatistikleri
+      </Title>
+
+      <BarChart width={730} height={250} data={mappedUserStats}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="Eski Kullanıcı" fill="#8884d8" stackId="a" />
+        <Bar dataKey="Yeni Kullanıcı" fill="#82ca9d" stackId="a" />
+      </BarChart>
+    </>
+  );
+};
+
 const Stats = () => {
   const { data, loading, error } = useMenuItemGetFetch('stats');
-  console.log(data?.GroupStat);
 
   return (
     <>
@@ -114,6 +142,8 @@ const Stats = () => {
       <Activity times={data?.GroupStat?.activity?.Times} weeks={data?.GroupStat?.activity?.Weeks} />
 
       <Messages messages={data?.GroupStat?.messages} />
+
+      <UserChart userStats={data?.GroupStat?.stat} />
 
       <Script src="https://unpkg.com/react/umd/react.production.min.js" />
       <Script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" />
