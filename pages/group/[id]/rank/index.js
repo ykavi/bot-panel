@@ -20,9 +20,9 @@ const Rank = () => {
 
   return (
     <Container>
-      <Row>
+      <Row gutter={[16, 24]}>
         {data?.UsersRank?.map((item, index) => (
-          <Col xl={6} lg={6} md={24} sm={24} key={index}>
+          <Col xl={6} lg={6} md={24} sm={24} xs={24} key={index}>
             <Card hoverable cover={getCoverContent(item)}>
               <ItemWrapper>
                 <Title level={4}>{`Level: ${item?.level}`}</Title>
